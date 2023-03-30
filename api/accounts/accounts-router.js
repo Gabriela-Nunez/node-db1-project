@@ -17,8 +17,7 @@ router.get(
   checkAccountId, async (req, res, next) => {
   // DO YOUR MAGIC
   try{
-    const account = await Account.getById(req.params.id)
-    res.json(account)
+    res.json(req.account)
   }catch(err){
     next(err)
   }
