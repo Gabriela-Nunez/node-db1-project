@@ -40,10 +40,11 @@ router.put(
   '/:id', 
   checkAccountId, 
   checkAccountNameUnique, 
-  checkAccountPayload, (req, res, next) => {
+  checkAccountPayload, async (req, res, next) => {
   // DO YOUR MAGIC
   try{
-    res.json('update accounts by id')
+    const updatedAccount = await Account.updateById(req.params.id, req.body)
+    res.json(updatedAccount)
   }catch(err){
     next(err)
   }
@@ -51,10 +52,11 @@ router.put(
 
 router.delete(
   '/:id', 
-  checkAccountId,(req, res, next) => {
+  checkAccountId, async (req, res, next) => {
   // DO YOUR MAGIC
   try{
-    res.json('delete accounts by id')
+    await Account.deleteById(req.params.id)
+    res.json(req.account)
   }catch(err){
     next(err)
   }
